@@ -1,11 +1,14 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-function getData(text) {
+var https = require('follow-redirects').https;
+var fs = require('fs');
+
+async function getData(text) {
   const options = {
     'method': 'POST',
     'hostname': 'api.meaningcloud.com',
-    'path': `/sentiment-2.1?key=${process.env.API_KEY}&lang=en&txt=Test!&model=general`,
+    'path': `/sentiment-2.1?key=${process.env.API_KEY}&lang=en&txt=${text}&model=general`,
     'headers': {
     },
     'maxRedirects': 20
@@ -30,4 +33,4 @@ function getData(text) {
 server_req.end();
 };
 
-module.exports = getData;
+module.exports = getData
