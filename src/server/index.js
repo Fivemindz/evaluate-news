@@ -1,7 +1,7 @@
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
-const sentiment = require('./sentiment.js')
+const sentiment = require('./sentiment')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
@@ -27,12 +27,14 @@ app.listen(8081, () => {
 })
 
 app.post('/test', async (req, res) => {
-  const text = req.body.text
-  try{
-    let data = sentiment(text)
-    res.json(data)
-  } catch(error){
-    let message = "Analysis failed!"
-    res.send(message)
+  const text = encodeURI(req.body)
+  const newData = await sentiment.getData(text)
+  const sendData = {
+    status: newData.status,
+    model: newData.model,
+    score_tage: newData.score_tag
   }
+  
+  console.log(sendData)
+  res.json(sendData)
 })

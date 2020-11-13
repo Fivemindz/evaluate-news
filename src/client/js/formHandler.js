@@ -12,9 +12,10 @@ function handleSubmit(event) {
     },
     body: JSON.stringify(data)
   })
- .then(function(res) {
-    console.log(res) 
-    document.getElementById('results').innerHTML = res
- })
+  .then(res => res.json())
+  .then(data =>
+    console.log(data.model),
+    document.getElementById('results').innerHTML = data.model
+  )
 }
 export { handleSubmit }
