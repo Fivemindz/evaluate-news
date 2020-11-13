@@ -5,6 +5,12 @@ const sentiment = require('./sentiment.js')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
+const dotenv = require('dotenv');
+dotenv.config();
+
+var https = require('follow-redirects').https;
+var fs = require('fs');
+
 const app = express()
 
 app.use(cors())
@@ -16,12 +22,17 @@ app.get('/', function (req, res) {
   res.sendFile('dist/index.html')
 })
 
-app.listen(8080, ()=> {
-  console.log('Example app listening on port 8080!')
+app.listen(8081, () => {
+  console.log('Example app listening on port 8081!')
 })
 
-app.post('/test', function (req, res) {
-  const text = req.body
-  console.log(text.text)
-  res.send(sentiment(text.text))
+app.post('/test', async (req, res) => {
+  const text = req.body.text
+  try{
+    let data = sentiment(text)
+    res.json(data)
+  } catch(error){
+    let message = "Analysis failed!"
+    res.send(message)
+  }
 })

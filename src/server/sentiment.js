@@ -4,7 +4,7 @@ dotenv.config();
 var https = require('follow-redirects').https;
 var fs = require('fs');
 
-async function getData(text) {
+function getData(text) {
   const options = {
     'method': 'POST',
     'hostname': 'api.meaningcloud.com',

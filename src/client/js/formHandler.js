@@ -1,10 +1,10 @@
 function handleSubmit(event) {
   event.preventDefault()
   
-  const text = document.getElementById('name').value
+  let text = document.getElementById('name').value
   let data = {'text': text}
 
-  fetch('http://localhost:8080/test', {
+  fetch('http://localhost:8081/test', {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
@@ -12,12 +12,9 @@ function handleSubmit(event) {
     },
     body: JSON.stringify(data)
   })
- .then(res => {
+ .then(function(res) {
     console.log(res) 
-    return res
- })
- .then(function(data) {
-     document.getElementById('results').innerHTML = data['status']
+    document.getElementById('results').innerHTML = res
  })
 }
 export { handleSubmit }
