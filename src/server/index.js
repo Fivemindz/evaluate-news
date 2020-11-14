@@ -29,10 +29,11 @@ app.listen(8081, () => {
 app.post('/test', async (req, res) => {
   const text = encodeURI(req.body)
   const newData = await sentiment.getData(text)
+  console.log(newData)
   const sendData = {
-    status: newData.status,
     model: newData.model,
-    score_tage: newData.score_tag
+    agreement: newData.agreement,
+    subjectivity: newData.subjectivity
   }
   
   console.log(sendData)

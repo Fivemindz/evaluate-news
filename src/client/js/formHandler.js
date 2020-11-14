@@ -13,9 +13,10 @@ function handleSubmit(event) {
     body: JSON.stringify(data)
   })
   .then(res => res.json())
-  .then(data =>
-    console.log(data.model),
-    document.getElementById('results').innerHTML = data.model
-  )
+  .then(function(json){
+    
+    
+    
+  })
 }
 export { handleSubmit }
