@@ -22,20 +22,14 @@ app.get('/', function (req, res) {
   res.sendFile('dist/index.html')
 })
 
-app.listen(8081, () => {
-  console.log('Example app listening on port 8081!')
+app.listen(8080, () => {
+  console.log('Example app listening on port 8080!')
 })
 
 app.post('/test', async (req, res) => {
   const text = encodeURI(req.body)
   const newData = await sentiment.getData(text)
-  console.log(newData)
-  const sendData = {
-    model: newData.model,
-    agreement: newData.agreement,
-    subjectivity: newData.subjectivity
-  }
-  
+  const sendData = JSON.stringify(newData)
   console.log(sendData)
   res.json(sendData)
 })
