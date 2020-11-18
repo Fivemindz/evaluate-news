@@ -8,9 +8,6 @@ const cors = require('cors')
 const dotenv = require('dotenv');
 dotenv.config();
 
-var https = require('follow-redirects').https;
-var fs = require('fs');
-
 const app = express()
 
 app.use(cors())
