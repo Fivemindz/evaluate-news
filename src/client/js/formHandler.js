@@ -20,6 +20,7 @@ function handleSubmit(event) {
     body: JSON.stringify(data)
   })
   .then(res => res.json())
+  
   .then(function(res) {
     const analysis = JSON.parse(res);
     addToForm("model", analysis.model);
